@@ -10,12 +10,15 @@ export default function Extintor() {
     const [revision, setRevision] = useState(null);
 
     useEffect(() => {
-        console.log(id);
+        console.log("ID BY URL: ", id);
+        console.log("ROuter: ", router);
+
+        
         if (revision == null) {
             getRevisionById(id);
         }
         // getRevisi onById(id);
-        console.log(revision)
+        // console.log(revision)
     }, [revision]);
 
     const dateFormat = (date) => {
