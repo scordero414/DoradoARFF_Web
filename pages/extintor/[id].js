@@ -2,7 +2,20 @@ import { store } from "../../firebase/initFirebase";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { Box, Heading, HStack, Icon, IconButton, ScrollView, Text, View, VStack, Badge, Divider, Image} from "native-base";
+import {
+    Box,
+    Heading,
+    HStack,
+    Icon,
+    IconButton,
+    ScrollView,
+    Text,
+    View,
+    VStack,
+    Badge,
+    Divider,
+    Image,
+} from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
 export default function Extintor() {
     const router = useRouter();
@@ -10,34 +23,41 @@ export default function Extintor() {
     const [revision, setRevision] = useState(null);
 
     useEffect(() => {
-        console.log("ID BY URL: ", id);
-        console.log("ROuter: ", router);
-
-        
-        if (revision == null) {
-            getRevisionById(id);
-        }
-        // getRevisi onById(id);
-        // console.log(revision)
-    }, [revision]);
+        getRevisionById(id);
+    }, []);
 
     const dateFormat = (date) => {
-        return ((date.getDate() > 9) ? date.getDate() : ('0' + date.getDate())) + '/' + ((date.getMonth() > 8) ? (date.getMonth() + 1) : ('0' + (date.getMonth() + 1))) + '/' + date.getFullYear()
-    }
+        return (
+            (date.getDate() > 9 ? date.getDate() : "0" + date.getDate()) +
+            "/" +
+            (date.getMonth() > 8
+                ? date.getMonth() + 1
+                : "0" + (date.getMonth() + 1)) +
+            "/" +
+            date.getFullYear()
+        );
+    };
 
     const knowEstatus = () => {
         let arr = [];
         for (const property in revision.extintor) {
-            if ((typeof revision.extintor[property]) === "string") {
+            if (typeof revision.extintor[property] === "string") {
                 // if (revision.extintor[property] == ["Regular" || "Malo" || "N/T"]) {
-                if (revision.extintor[property] == "Regular" || revision.extintor[property] == "Malo" || revision.extintor[property] == "N/T") {
-                    arr.push(` ${property.replace(new RegExp("\\_","g"),' ')}: ${revision.extintor[property]}`);
+                if (
+                    revision.extintor[property] == "Regular" ||
+                    revision.extintor[property] == "Malo" ||
+                    revision.extintor[property] == "N/T"
+                ) {
+                    arr.push(
+                        ` ${property.replace(new RegExp("\\_", "g"), " ")}: ${
+                            revision.extintor[property]
+                        }`
+                    );
                 }
             }
-
         }
         return arr;
-    }
+    };
 
     const getRevisionById = async (id) => {
         const docRef = doc(store, "revision_extintores", id);
@@ -69,7 +89,6 @@ export default function Extintor() {
         <View>
             {revision !== null ? (
                 <View style={{ flex: 1, backgroundColor: "#ffffff" }}>
-                    
                     <ScrollView>
                         <Box p={2} w="95%" mx="auto">
                             {revision.userId !== null ? (
@@ -190,8 +209,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="success">
                                                         {dateFormat(
-                                                            revision.extintor
-                                                                .fecha_recarga.toDate()
+                                                            revision.extintor.fecha_recarga.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -205,8 +223,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="yellow">
                                                         {dateFormat(
-                                                            revision.extintor
-                                                                .fecha_proxima_recarga.toDate()
+                                                            revision.extintor.fecha_proxima_recarga.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -219,8 +236,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="success">
                                                         {dateFormat(
-                                                            revision.extintor
-                                                                .fecha_prueba_hidrostatica.toDate()
+                                                            revision.extintor.fecha_prueba_hidrostatica.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -234,8 +250,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="yellow">
                                                         {dateFormat(
-                                                            revision.extintor
-                                                                .fecha_proxima_prueba_hidrostatica.toDate()
+                                                            revision.extintor.fecha_proxima_prueba_hidrostatica.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -280,7 +295,6 @@ export default function Extintor() {
                             ) : (
                                 <View></View>
                             )}
-                            
                         </Box>
                     </ScrollView>
                 </View>
