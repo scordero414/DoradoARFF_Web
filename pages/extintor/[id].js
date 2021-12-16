@@ -204,8 +204,6 @@ export default function Extintor() {
                                         <Heading size="xs" fontSize={18} bold>
                                             Fechas importantes:
                                         </Heading>
-                                        {revision.extintor.fecha_recarga
-                                            .seconds === undefined ? (
                                             <View>
                                                 <HStack
                                                     my={2}
@@ -216,7 +214,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="success">
                                                         {dateFormat(
-                                                            revision.extintor.fecha_recarga.toDate()
+                                                            revision.extintor.fecha_recarga?.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -230,7 +228,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="yellow">
                                                         {dateFormat(
-                                                            revision.extintor.fecha_proxima_recarga.toDate()
+                                                            revision.extintor.fecha_proxima_recarga?.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -243,7 +241,7 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="success">
                                                         {dateFormat(
-                                                            revision.extintor.fecha_prueba_hidrostatica.toDate()
+                                                            revision.extintor.fecha_prueba_hidrostatica?.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
@@ -257,14 +255,11 @@ export default function Extintor() {
                                                     </Text>
                                                     <Badge colorScheme="yellow">
                                                         {dateFormat(
-                                                            revision.extintor.fecha_proxima_prueba_hidrostatica.toDate()
+                                                            revision.extintor.fecha_proxima_prueba_hidrostatica?.toDate()
                                                         )}
                                                     </Badge>
                                                 </HStack>
                                             </View>
-                                        ) : (
-                                            <View></View>
-                                        )}
 
                                         <Divider
                                             my={3}
