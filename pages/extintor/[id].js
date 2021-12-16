@@ -17,6 +17,13 @@ import {
     Image,
 } from "native-base";
 import { MaterialIcons } from "@expo/vector-icons";
+
+export async function getServerSideProps(context) {
+    return {
+        props: {},
+    };
+}
+
 export default function Extintor() {
     const router = useRouter();
     const id = router.query.id;
